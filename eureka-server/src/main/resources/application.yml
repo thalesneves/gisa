@@ -1,7 +1,7 @@
 
 spring:
   application:
-    name: 'eureka-server'
+    name: 'eurekaserver'
 
 server:
   port: 8761
