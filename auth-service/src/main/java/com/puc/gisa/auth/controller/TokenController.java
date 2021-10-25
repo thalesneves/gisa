@@ -15,7 +15,7 @@ public class TokenController {
 	
 	@DeleteMapping("/revoke")
 	public void revoke(HttpServletRequest request, HttpServletResponse response) {
-		Cookie cookie = new Cookie("refresh_token", null);
+		Cookie cookie = new Cookie("refreshToken", null);
 		cookie.setHttpOnly(true);
 		cookie.setSecure(false);
 		cookie.setPath(request.getContextPath() + "/oauth/token");

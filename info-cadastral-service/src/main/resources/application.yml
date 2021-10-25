@@ -1,7 +1,7 @@
 
 spring:
   application:
-    name: 'infocadastralservice'
+    name: 'info-cadastral-service'
 
 server:
  port: 8082

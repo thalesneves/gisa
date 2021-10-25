@@ -6,10 +6,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
 @EnableEurekaClient
-public class InfocadastralApplication {
+public class InfoCadastralApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(InfocadastralApplication.class, args);
+		SpringApplication.run(InfoCadastralApplication.class, args);
 	}
 
 }
