@@ -1,7 +1,22 @@
 
 spring:
   application:
-    name: 'springcloudgateway'
+    name: 'spring-cloud-gateway'
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+              allowedOrigins: "*"
+              allowedMethods: "*"
+              allowedHeaders: "*"
+      routes:
+        - id: info-cadastral-id
+          uri: lb://info-cadastral-service
+          predicates:
+            - Path=/infocadastral/**
 
 server:
   port: 11506
@@ -12,3 +27,4 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: 'http://localhost:8761/eureka'
+
