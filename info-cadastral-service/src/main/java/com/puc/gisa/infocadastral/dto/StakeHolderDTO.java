@@ -14,9 +14,11 @@ public class StakeHolderDTO {
 	
 	private String tipo;
 	private String plano;
+	private String categoria;
 	private String nome;
 	private String cargo;
 	private String telefone;
 	private String localizacao;
 	private String formacao;
+	
 }
