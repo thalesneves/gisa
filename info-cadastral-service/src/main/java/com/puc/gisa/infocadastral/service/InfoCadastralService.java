@@ -8,15 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.puc.gisa.infocadastral.api.SmockerAPI;
+import com.puc.gisa.infocadastral.constants.URLConstants;
 import com.puc.gisa.infocadastral.dto.StakeHolderDTO;
 
 @Service
 public class InfoCadastralService {
 	
 	public ResponseEntity<List<StakeHolderDTO>> findAll() throws IOException {
-		String resultAPI = SmockerAPI.findAll();
+		String resultAPI = SmockerAPI.find(URLConstants.URL_GET_USERS);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
@@ -29,13 +29,29 @@ public class InfoCadastralService {
 		return ResponseEntity.notFound().build();
 	}
 	
-	public ResponseEntity<StakeHolderDTO> findById(final Long id) {
-		String resultAPI = SmockerAPI.findById(id);
+	public ResponseEntity<List<StakeHolderDTO>> findPrestadores() throws IOException {
+		String resultAPI = SmockerAPI.find(URLConstants.URL_GET_PRESTADOR);
 		
-		StakeHolderDTO stakeHolder = new Gson().fromJson(resultAPI, StakeHolderDTO.class);
+		ObjectMapper mapper = new ObjectMapper();
 		
-		if (stakeHolder != null) {
-			return ResponseEntity.ok(stakeHolder);
+		List<StakeHolderDTO> stakeHolders = Arrays.asList(mapper.readValue(resultAPI, StakeHolderDTO[].class));
+		
+		if (stakeHolders != null) {
+			return ResponseEntity.ok(stakeHolders);
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	public ResponseEntity<List<StakeHolderDTO>> findAssociados() throws IOException {
+		String resultAPI = SmockerAPI.find(URLConstants.URL_GET_ASSOCIADO);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		List<StakeHolderDTO> stakeHolders = Arrays.asList(mapper.readValue(resultAPI, StakeHolderDTO[].class));
+		
+		if (stakeHolders != null) {
+			return ResponseEntity.ok(stakeHolders);
 		}
 		
 		return ResponseEntity.notFound().build();
