@@ -17,6 +17,10 @@ spring:
           uri: lb://info-cadastral-service
           predicates:
             - Path=/infocadastral/**
+        - id: servicos-associado-id
+          uri: lb://servicos-associado-service
+          predicates:
+            - Path=/servicosassociado/**
 
 server:
   port: 11506
@@ -27,4 +31,3 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: 'http://localhost:8761/eureka'
-
