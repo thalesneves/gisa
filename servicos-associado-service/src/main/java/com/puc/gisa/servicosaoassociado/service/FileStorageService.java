@@ -2,15 +2,17 @@ package com.puc.gisa.servicosaoassociado.service;
 
 import java.net.URI;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.puc.gisa.servicosaoassociado.domain.dto.FileDTO;
 import com.puc.gisa.servicosaoassociado.domain.entity.FileEntity;
 import com.puc.gisa.servicosaoassociado.repository.FileStorageRepository;
 
@@ -35,12 +37,24 @@ public class FileStorageService {
 		return null;
 	}
 	
+	public Page<FileDTO> getAllFiles(Pageable pagination) {
+		Page<FileEntity> files = fileRepository.findAll(pagination);
+		return FileDTO.converter(files);
+	}
+	
 	public Optional<FileEntity> getFile(Long id) {
 		return fileRepository.findById(id);
 	}
 	
-	public List<FileEntity> getFiles() {
-		return fileRepository.findAll();
+	public ResponseEntity<?> deleteFile(Long id) {
+		Optional<FileEntity> optional = fileRepository.findById(id);
+		
+		if (optional.isPresent()) {
+			fileRepository.deleteById(id);
+			return ResponseEntity.ok().build();
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 
 }

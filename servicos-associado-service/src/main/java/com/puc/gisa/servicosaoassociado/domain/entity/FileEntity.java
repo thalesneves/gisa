@@ -39,9 +39,9 @@ public class FileEntity extends AbstractEntity {
     private String fileType;
     
     @Temporal(TemporalType.DATE)
-	@Column(name = "log_data", length = 10)
+	@Column(name = "log_date", length = 10)
     @NotNull
-	private Date logData;
+	private Date logDate;
     
     @Lob
     private byte[] data;
