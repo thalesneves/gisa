@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.Date;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.puc.gisa.servicosaoassociado.domain.dto.FileDTO;
 import com.puc.gisa.servicosaoassociado.domain.entity.FileEntity;
+import com.puc.gisa.servicosaoassociado.domain.vo.FileVO;
 import com.puc.gisa.servicosaoassociado.repository.FileStorageRepository;
 
 @Service
@@ -52,6 +55,18 @@ public class FileStorageService {
 		if (optional.isPresent()) {
 			fileRepository.deleteById(id);
 			return ResponseEntity.ok().build();
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+
+	public ResponseEntity<FileDTO> editFile(Long id, @Valid FileVO fileVO) {
+		Optional<FileEntity> optional = fileRepository.findById(id);
+		
+		if (optional.isPresent()) {
+			FileEntity file = fileVO.edit(id, fileRepository);
+			
+			return ResponseEntity.ok(new FileDTO(file));
 		}
 		
 		return ResponseEntity.notFound().build();

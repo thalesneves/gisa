@@ -1,6 +1,7 @@
 package com.puc.gisa.servicosaoassociado.controller;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +27,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.puc.gisa.servicosaoassociado.domain.dto.FileDTO;
 import com.puc.gisa.servicosaoassociado.domain.entity.FileEntity;
+import com.puc.gisa.servicosaoassociado.domain.vo.FileVO;
 import com.puc.gisa.servicosaoassociado.service.FileStorageService;
 
 @RestController
@@ -61,6 +65,12 @@ public class FileController {
 	@Transactional
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		return documentStorageService.deleteFile(id);
+	}
+	
+	@PutMapping("/{id}")
+	@Transactional
+	public ResponseEntity<FileDTO> edit(@PathVariable Long id, @RequestBody @Valid FileVO fileVO) {
+		return documentStorageService.editFile(id, fileVO);
 	}
 
 }
