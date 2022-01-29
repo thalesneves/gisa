@@ -50,10 +50,10 @@ public class FileController {
 		return documentStorageService.getAllFiles(pagination);
 	}
 	
-	@GetMapping("/downloadfile/{fileId}")
+	@GetMapping("/downloadfile/{id}")
 	@PreAuthorize("hasAuthority('ROLE_FULL_ACCESS')")
-	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Long fileId) {
-		FileEntity document = documentStorageService.getFile(fileId).get();
+	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Long id) {
+		FileEntity document = documentStorageService.getFile(id).get();
 		
 		return ResponseEntity.ok()
 				.contentType(MediaType.parseMediaType(document.getFileType()))
