@@ -10,17 +10,17 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.puc.gisa.infocadastral.api.SmockerAPI;
 import com.puc.gisa.infocadastral.constants.URLConstants;
-import com.puc.gisa.infocadastral.dto.StakeHolderDTO;
+import com.puc.gisa.infocadastral.dto.UserDTO;
 
 @Service
 public class InfoCadastralService {
 	
-	public ResponseEntity<List<StakeHolderDTO>> findAll() throws IOException {
+	public ResponseEntity<List<UserDTO>> findAll() throws IOException {
 		String resultAPI = SmockerAPI.find(URLConstants.URL_GET_USERS);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
-		List<StakeHolderDTO> stakeHolders = Arrays.asList(mapper.readValue(resultAPI, StakeHolderDTO[].class));
+		List<UserDTO> stakeHolders = Arrays.asList(mapper.readValue(resultAPI, UserDTO[].class));
 		
 		if (stakeHolders != null) {
 			return ResponseEntity.ok(stakeHolders);
@@ -29,12 +29,12 @@ public class InfoCadastralService {
 		return ResponseEntity.notFound().build();
 	}
 	
-	public ResponseEntity<List<StakeHolderDTO>> findPrestadores() throws IOException {
+	public ResponseEntity<List<UserDTO>> findPrestadores() throws IOException {
 		String resultAPI = SmockerAPI.find(URLConstants.URL_GET_PRESTADOR);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
-		List<StakeHolderDTO> stakeHolders = Arrays.asList(mapper.readValue(resultAPI, StakeHolderDTO[].class));
+		List<UserDTO> stakeHolders = Arrays.asList(mapper.readValue(resultAPI, UserDTO[].class));
 		
 		if (stakeHolders != null) {
 			return ResponseEntity.ok(stakeHolders);
@@ -43,12 +43,12 @@ public class InfoCadastralService {
 		return ResponseEntity.notFound().build();
 	}
 	
-	public ResponseEntity<List<StakeHolderDTO>> findAssociados() throws IOException {
+	public ResponseEntity<List<UserDTO>> findAssociados() throws IOException {
 		String resultAPI = SmockerAPI.find(URLConstants.URL_GET_ASSOCIADO);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
-		List<StakeHolderDTO> stakeHolders = Arrays.asList(mapper.readValue(resultAPI, StakeHolderDTO[].class));
+		List<UserDTO> stakeHolders = Arrays.asList(mapper.readValue(resultAPI, UserDTO[].class));
 		
 		if (stakeHolders != null) {
 			return ResponseEntity.ok(stakeHolders);
