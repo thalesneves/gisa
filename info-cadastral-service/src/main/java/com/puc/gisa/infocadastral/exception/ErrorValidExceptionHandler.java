@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.puc.gisa.infocadastral.dto.ErrorFormDTO;
+import com.puc.gisa.infocadastral.domain.dto.ErrorFormDTO;
 
 @RestControllerAdvice
 public class ErrorValidExceptionHandler {

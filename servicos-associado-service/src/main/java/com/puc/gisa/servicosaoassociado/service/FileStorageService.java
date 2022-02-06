@@ -22,8 +22,7 @@ import com.puc.gisa.servicosaoassociado.repository.FileStorageRepository;
 @Service
 public class FileStorageService {
 	
-	@Autowired
-	private FileStorageRepository fileRepository;
+	@Autowired private FileStorageRepository fileRepository;
 	
 	public ResponseEntity<String> saveFile(MultipartFile file, String flowName, UriComponentsBuilder uriBuilder) {
 		

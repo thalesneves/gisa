@@ -1,4 +1,4 @@
-package com.puc.gisa.infocadastral.dto;
+package com.puc.gisa.infocadastral.domain.dto;
 
 import java.io.Serializable;
 

@@ -2,6 +2,20 @@
 spring:
   application:
     name: 'info-cadastral-service'
+  datasource:
+    url: 'jdbc:mysql://127.0.0.1:3306/info_cadastral_service?createDatabaseIfNotExist=true&useTimezone=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true'
+    username: 'root'
+    password: 'root'
+    driverClassName: 'com.mysql.cj.jdbc.Driver'
+    initialization-mode: 'always'
+  jpa:
+    database-platform: 'org.hibernate.dialect.MySQL8Dialect'
+    hibernate.ddl-auto: 'update'
+    generate-ddl: 'true'
+    properties:
+      hibernate:
+        show-sql: 'true'
+        format_sql: 'true'
   rabbitmq:
     host: 'localhost'
     port: '5672'
