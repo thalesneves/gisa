@@ -35,6 +35,11 @@ public class InfoCadastralService {
 		return UserDTO.converter(users);
 	}
 	
+	public Page<UserDTO> findByCategoria(String categoria, Pageable pagination) throws IOException {
+		Page<UserEntity> users = infoCadastralRepository.findByCategoria(categoria, pagination);
+		return UserDTO.converter(users);
+	}
+	
 	public ResponseEntity<UserDTO> save(UserDTO userDTO, UriComponentsBuilder uriBuilder) {
 		UserEntity userEntity = new UserEntity(userDTO);
 		infoCadastralRepository.save(userEntity);

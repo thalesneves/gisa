@@ -11,5 +11,7 @@ public interface InfoCadastralRepository extends JpaRepository<UserEntity, Long>
 	Page<UserEntity> findByTipo(String tipo, Pageable paginacao);
 	
 	Page<UserEntity> findByCargoContains(String cargo, Pageable paginacao);
+	
+	Page<UserEntity> findByCategoria(String categoria, Pageable paginacao);
 
 }

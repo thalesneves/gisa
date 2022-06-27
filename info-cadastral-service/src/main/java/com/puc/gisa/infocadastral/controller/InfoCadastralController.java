@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,22 +35,25 @@ public class InfoCadastralController {
 	
 	@GetMapping(path = "/users")
 	@PreAuthorize("hasAuthority('ROLE_FULL_ACCESS')")
-	public Page<UserDTO> findAll(@PageableDefault(sort = "nome", direction = Direction.DESC, page = 0, size = 10) Pageable pagination) throws IOException {
+	public Page<UserDTO> findAll(@PageableDefault(sort = "nome", direction = Direction.DESC, page = 0, size = 10) Pageable pagination,
+			@RequestParam(required = false) String cargo, @RequestParam(required = false) String categoria) throws IOException {
+		
+		if (StringUtils.isNotEmpty(cargo)) {
+			return infoCadastralService.findByCargo(cargo, pagination);
+		}
+		
+		if (StringUtils.isNotEmpty(categoria)) {
+			return infoCadastralService.findByCategoria(categoria, pagination);
+		}
+		
 		return infoCadastralService.findAll(pagination);
 	}
-
+	
 	@GetMapping(path = "/users/{tipo}")
 	@PreAuthorize("hasAuthority('ROLE_FULL_ACCESS')")
 	public Page<UserDTO> findByTipo(@PageableDefault(sort = "nome", direction = Direction.DESC, page = 0, size = 10) Pageable pagination,
 			@PathVariable String tipo) throws IOException {
 		return infoCadastralService.findByTipo(tipo, pagination);
-	}
-	
-	@GetMapping(path = "/users/filter")
-	@PreAuthorize("hasAuthority('ROLE_FULL_ACCESS')")
-	public Page<UserDTO> findByCargo(@PageableDefault(sort = "nome", direction = Direction.DESC, page = 0, size = 10) Pageable pagination,
-			@RequestParam("cargo") String cargo) throws IOException {
-		return infoCadastralService.findByCargo(cargo, pagination);
 	}
 	
 	@PostMapping(path = "/user")
